@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O2 Sensor Dashboard</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+  }
+  header {
+    background: #50b3a2;
+    color: white;
+    padding-top: 30px;
+    min-height: 70px;
+    border-bottom: #e8491d 3px solid;
+  }
+  header a {
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+  }
+  header ul {
+    padding: 0;
+    list-style: none;
+  }
+  header li {
+    float: left;
+    display: inline;
+    padding: 0 20px 0 20px;
+  }
+  header #branding {
+    float: left;
+  }
+  header #branding h1 {
+    margin: 0;
+  }
+  header nav {
+    float: right;
+    margin-top: 10px;
+  }
+  header .highlight, header .current a {
+    color: #e8491d;
+    font-weight: bold;
+  }
+  header a:hover {
+    color: #ffffff;
+    font-weight: bold;
+  }
+  #csvFileInput {
+    margin: 10px;
+    padding: 5px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+  }
+  #chart {
+    margin-top: 20px;
+  }
+  table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+  }
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+  th, td {
+    padding: 10px;
+    text-align: left;
+  }
+  th {
+    background-color: #f4f4f4;
+  }
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  button {
+    background-color: #50b3a2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #45a091;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div id="branding">
+      <h1>O2 Sensor Dashboard</h1>
+    </div>
+    <nav>
+      <ul>
+        <li class="current"><a href="index.html">Dashboard</a></li>
+        <!-- Add more navigation items here if needed -->
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <input type="file" id="csvFileInput" accept=".csv">
+  <button onclick="loadCSV()">Import CSV</button>
+  <div id="chart"></div>
+  
+  <table id="fileTable">
+    <thead>
+      <tr>
+        <th>File Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- File names will be inserted here -->
+    </tbody>
+  </table>
+</div>
+
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script>
+  const fileList = [];
+
+  function loadCSV() {
+    const input = document.getElementById('csvFileInput');
+    const file = input.files[0];
+    const reader = new FileReader();
+    
+    // Add the file name to the list and update the table
+    fileList.push(file.name);
+    updateFileTable();
+
+    reader.onload = function(e) {
+      const text = e.target.result;
+      const data = d3.csvParse(text);
+      drawChart(data);
+    }
+    
+    reader.readAsText(file);
+  }
+
+  function updateFileTable() {
+    const tableBody = document.getElementById('fileTable').getElementsByTagName('tbody')[0];
+    tableBody.innerHTML = ''; // Clear existing table body
+    fileList.forEach(function(fileName, index) {
+      let row = tableBody.insertRow();
+      let cell = row.insertCell();
+      cell.textContent = fileName;
+    });
+  }
+  
+  // drawChart function goes here...
+</script>
+</body>
+</html>

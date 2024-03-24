@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Additive Manufacturing</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  </head>
+  <body>
+    <nav class="navbar is-black">
+      <div class="container">
+        <div class="navbar-brand">
+          <a href="https://mse.mst.edu/research/additivemanufacturing/" class="navbar-item is active">Additive Manufacturing</a>
+          </a>
+          <span class="navbar-burger burger" data-target="navMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navMenu" class="navbar-menu">
+          <div class="navbar-end">
+            <a href="index.html" class="navbar-item is active">Home</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <script type="text/javascript">
+      (function () {
+        var burger = document.querySelector(".burger");
+        var nav = document.querySelector("#" + burger.dataset.target);
+        burger.addEventListener("click", function () {
+          burger.classList.toggle("is-active");
+          nav.classList.toggle("is-active");
+        });
+      })();
+    </script>
+  <section class="section">
+    <div class="container">
+      <h1>Interact with AI to question data</h1>
+      <div class="columns">
+        <div class="column">
+          <textarea class="textarea" placeholder="e.g. Is this data accurate?"></textarea>
+        </div>
+        <div class="column">
+          <div class="card">
+            <div class="card-content">
+              <div class="content">
+                The data presented has shown flaws at time [] and seems to have a common tolerance of [] ◯
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <p>&nbsp;&nbsp;</p>
+      <div class="container">
+        <h1>Please upload Data to be trained</h1>
+        <div class="file has-name is-boxed">
+          <label class="file-label">
+            <input class="file-input" type="file" name="resume">
+            <span class="file-cta">
+              <span class="file-icon">
+                <i class="fas fa-upload"></i>
+              </span>
+              <span class="file-label">
+                Choose a file…
+              </span>
+            </span>
+            <span class="file-name">
+              Machine Data File JSON/TXT
+            </span>
+          </label>
+        </div>
+    </div>
+  </section>
+  </body>
+</html>
